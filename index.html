@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> M JEWELLERS| Royal Premium Jewellery</title>
+    <!-- Tailwind CSS for Elegant Styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Royal Gold Accent Themes */
+        .gold-gradient {
+            background: linear-gradient(135deg, #111827 0%, #030712 100%);
+        }
+        .royal-border {
+            border-image: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
+        }
+        .gold-text {
+            background: linear-gradient(to right, #bf953f 20%, #fcf6ba 40%, #b38728 60%, #fbf5b7 80%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-bg {
+            background: linear-gradient(to right, #bf953f, #d4af37, #aa771c);
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#070a12] text-gray-200 min-h-screen font-serif flex flex-col justify-between">
+
+
+    <!-- 2. LUXURY HEADER & NAVBAR -->
+    <header class="bg-[#070a12]/90 sticky top-0 z-50 backdrop-blur-md border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+            <!-- Brand Logo -->
+           <!-- Is code ko apne main HTML file ke logo area me replace kar dein -->
+<div class="flex flex-col">
+    <span class="text-2xl sm:text-3xl font-light tracking-[0.25em] gold-text uppercase">MJEWELLERS</span>
+    <span class="text-[9px] tracking-[0.4em] text-amber-500/80 uppercase font-sans -mt-1">Purity & Luxury Defined</span>
+</div>  
+
+
+            <!-- Categories Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase font-sans text-gray-400">
+                <a href="#" class="hover:text-amber-400 transition-colors">Gold</a>
+                <a href="#" class="hover:text-amber-400 transition-colors">Diamond</a>
+                <a href="#" class="hover:text-amber-400 transition-colors">Silver Ware</a>
+                <a href="#" class="hover:text-amber-400 transition-colors">Bridal Collection</a>
+            </nav>
+
+            <!-- Bag/Cart Action Trigger -->
+            <div class="flex items-center gap-4">
+                <div class="relative cursor-pointer group p-2" onclick="toggleCartModal()">
+                    <i class="fa-solid fa-gem text-xl text-amber-400 group-hover:text-amber-300 transition-colors"></i>
+                    <span id="cartCount" class="absolute top-0 right-0 gold-bg text-black font-sans font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- 3. FLIPKART STYLE ROYAL HERO BANNER -->
+    <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 my-6">
+        <div class="relative rounded-2xl overflow-hidden gold-gradient h-64 sm:h-80 flex items-center p-8 sm:p-12 border border-amber-500/20 shadow-2xl">
+            <div class="z-10 max-w-lg">
+                <span class="text-amber-400 font-sans text-xs uppercase tracking-widest font-bold">Exclusive Craftsmanship</span>
+                <h1 class="text-3xl sm:text-5xl font-light mt-2 text-white leading-tight tracking-wide">Heritage Designs For Your Forever</h1>
+                <p class="text-gray-400 text-xs sm:text-sm mt-3 font-sans">Flat 0% Making Charges on Certified Diamond Bridal Sets this season.</p>
+                <button class="mt-6 font-sans text-xs uppercase tracking-widest font-semibold border border-amber-500 text-amber-400 px-6 py-3 rounded-md hover:bg-amber-500 hover:text-black transition-all">Explore Catalogue</button>
+            </div>
+            <!-- Accents -->
+            <div class="absolute right-0 bottom-0 top-0 w-1/2 opacity-20 lg:opacity-40 pointer-events-none">
+                <i class="fa-solid fa-crown absolute right-12 top-12 text-amber-500/10 text-[12rem]"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LIVE LIVE JEWELLERY INTERACTIVE MARKETPLACE -->
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex-1 mb-16">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl sm:text-3xl font-light tracking-widest uppercase text-white">Signature Masterpieces</h2>
+            <div class="w-24 h-[1px] gold-bg mx-auto mt-3"></div>
+        </div>
+
+        <!-- Jewellery Grid -->
+        <div id="jewelleryGrid" ></div>
+            <!-- Dynamic Cards Loaded by JavaScript -->
+    </main>
+
+    <!-- 5. SHOPPING CART OVERLAY MODAL (AMAZON STYLE) -->
+    <div id="cartModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-[#0f1424] border border-amber-500/20 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-light tracking-wider text-amber-400 border-b border-amber-500/10 pb-3 mb-4 uppercase">Your Vault (Cart)</h3>
+            <div id="cartItemsContainer" class="max-h-60 overflow-y-auto space-y-4 font-sans">
+                <!-- Cart items load dynamically -->
+            </div>
+            <div class="border-t border-amber-500/10 mt-4 pt-4 font-sans">
+                <div class="flex justify-between font-bold text-base mb-4">
+                    <span>Estimated Total:</span>
+                    <span id="cartTotal" class="text-amber-400">₹0</span>
+                </div>
+                <button onclick="checkoutVault()" class="w-full gold-bg text-black font-bold py-3 rounded-lg text-sm tracking-widest uppercase hover:opacity-90 transition-all">
+                    Book & Secure Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. MEESHO/FLIPKART INSPIRED ASSURANCE BADGES -->
+    <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mb-16 grid grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
+        <div class="bg-[#0f1424] border border-amber-500/10 rounded-xl p-4 flex items-center gap-4">
+            <i class="fa-solid fa-certificate text-2xl text-amber-400"></i>
+            <div><h4 class="text-xs font-bold uppercase tracking-wider">100% Hallmarked</h4><p class="text-[11px] text-gray-400">BIS Certified Purity</p></div>
+        </div>
+        <div class="bg-[#0f1424] border border-amber-500/10 rounded-xl p-4 flex items-center gap-4">
+            <i class="fa-solid fa-shield-cat text-2xl text-amber-400"></i>
+            <div><h4 class="text-xs font-bold uppercase tracking-wider">Insured Shipping</h4><p class="text-[11px] text-gray-400">Secure transit vault</p></div>
+        </div>
+        <div class="bg-[#0f1424] border border-amber-500/10 rounded-xl p-4 flex items-center gap-4">
+            <i class="fa-solid fa-handshake text-2xl text-amber-400"></i>
+            <div><h4 class="text-xs font-bold uppercase tracking-wider">Easy Buyback</h4><p class="text-[11px] text-gray-400">Best exchange rates</p></div>
+        </div>
+        <div class="bg-[#0f1424] border border-amber-500/10 rounded-xl p-4 flex items-center gap-4">
+            <i class="fa-solid fa-map-pin text-2xl text-amber-400"></i>
+            <div><h4 class="text-xs font-bold uppercase tracking-wider">Store Pickup</h4><p class="text-[11px] text-gray-400">Try before you buy</p></div>
+        </div>
+    </section>
+
+    <!-- 7. LUXURY FOOTER WITH REQUESTED SOCIAL MEDIA VAULTS -->
+              
+    <footer class="bg-[#04060b] border-t border-amber-500/10 pt-12 pb-6 font-sans text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div class="text-center md:text-left">
+                <span class="text-lg font-light tracking-[0.2em] text-white uppercase font-serif"> M JEWELLERS </span>
+                <p class="text-gray-500 mt-1">© MJEWELLERS | PREMIOUM Jewellery House. Crafted for absolute elegance.</p>
+            </div>
+
+            <!-- PREMIUM SOCIAL HANDLES -->
+            <div class="flex items-center gap-5">
+                <!-- Instagram (Luxury Pink-Gold Hover) -->
+                <a href="https://instagram.com/jewellery3007" target="_blank" class="w-10 h-10 rounded-full bg-[#0f1424] border border-amber-500/20 flex items-center justify-center text-amber-400 hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:to-[#ee2a7b] hover:text-white transition-all transform hover:-translate-y-1" title="Instagram Portal">
+                    <i class="fa-brands fa-instagram text-base"></i>
+                </a>
+                <!-- WhatsApp (Luxury Emerald Hover) -->
+                <a href="https://wa.me/8529990974" target="_blank" class="w-10 h-10 rounded-full bg-[#0f1424] border border-amber-500/20 flex items-center justify-center text-amber-400 hover:bg-emerald-600 hover:text-white transition-all transform hover:-translate-y-1" title="Direct WhatsApp Concierge">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                </a>
+                <!-- YouTube (Luxury Crimson Hover) -->
+                <a href="https://youtube.com/@Jewellers-q4v" target="_blank" class="w-10 h-10 rounded-full bg-[#0f1424] border border-amber-500/20 flex items-center justify-center text-amber-400 hover:bg-rose-600 hover:text-white transition-all transform hover:-translate-y-1" title="YouTube Showcase Channel">
+                    <i class="fa-brands fa-youtube text-base"></i>
+                </a>
+            </div>
+        </div>
+    
+    </footer>
+
+    <!-- DYNAMIC CORE DATA AND CALCULATION SCRIPTS -->
+ 
+    <script src="script.js"></script>
+
+</body>
+</html>
